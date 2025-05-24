@@ -1,0 +1,58 @@
+---
+import LogoSVG from '../icons/logo.svg'
+---
+
+<!-- <script>
+  import { setup, render } from '../effects/SVGScene'
+
+  const defaultExtrusion = 6
+  const logo = document.querySelector('#logo')
+  const svg = logo?.querySelector('svg')
+  const scene = setup(logo, {
+    rendererSize: 80,
+  })
+  const { object, update } = render(defaultExtrusion, svg?.outerHTML)
+
+  if (object) scene?.add(object)
+</script> -->
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: var(--size-7);
+    display: flex;
+    place-content: space-between;
+    color: var(--accent);
+    z-index: 1;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-8);
+    font-size: var(--font-size-4);
+    line-height: var(--font-lineheight-0);
+    text-decoration: none;
+  }
+
+  .end {
+    display: flex;
+    gap: var(--size-8);
+  }
+</style>
+
+<header>
+  <a href="/" id="logo">
+    <LogoSVG />
+  </a>
+  <div class="end">
+    <a href="/blog">blog</a>
+    <a href="/about">about</a>
+  </div>
+</header>

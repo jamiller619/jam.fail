@@ -1,0 +1,58 @@
+---
+const { title, image, link, description } = Astro.props
+---
+
+<style>
+  .link {
+    aspect-ratio: var(--ratio-landscape);
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    text-decoration: none;
+    box-shadow: var(--shadow-2);
+    padding: var(--size-6);
+    border-radius: var(--radius-2);
+    overflow: hidden;
+
+    @media (min-width: 1024px) {
+      filter: grayscale(1);
+      transition: filter 150ms;
+
+      .content {
+        opacity: 0;
+        transform: translateY(50px);
+        transition:
+          opacity 150ms ease-out,
+          transform 150ms ease-in-out;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      filter: grayscale(0);
+
+      .content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    p {
+      font-weight: bold;
+      color: var(--text-2);
+    }
+  }
+</style>
+
+<a
+  href={link}
+  class="link"
+  style={{
+    backgroundImage: `url(${image.url.src})`,
+  }}>
+  <span class="content">
+    <h2>{title}</h2>
+    <p>{description}</p>
+  </span>
+</a>

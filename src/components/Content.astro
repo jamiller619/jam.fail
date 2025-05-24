@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content'
+
+const { collection } = Astro.props
+
+const data = await getCollection(collection)
+---
+
+<div class="grid">
+  {data.map((item) => <Card {...item.data} />)}
+</div>

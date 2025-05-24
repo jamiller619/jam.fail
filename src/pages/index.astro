@@ -1,0 +1,61 @@
+---
+import Main from '../layouts/Main.astro'
+import Hero from '../components/Hero.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import { getCollection } from 'astro:content'
+
+const projects = await getCollection('projects')
+---
+
+<style>
+  .grid {
+    display: grid;
+    gap: calc(var(--body-padding) / 2);
+    grid-template-columns: 1fr 1fr;
+    margin-inline: calc(var(--body-padding) / 4);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .letter {
+      line-height: 1;
+      display: inline-block;
+    }
+  }
+</style>
+
+<Main>
+  <Hero />
+  <div class="grid">
+    {projects.map((project) => <ProjectCard {...project.data} />)}
+  </div>
+</Main>
+
+<script>
+  import { animate } from 'animejs'
+  import { wrapText, type Options } from '../effects/TextWrapper'
+
+  const opts: Options = {
+    attributes: {
+      class: 'letter',
+    },
+  }
+
+  document.querySelectorAll('.grid h2').forEach((el) => wrapText(el, opts))
+
+  document.querySelectorAll('.grid a').forEach((el) => {
+    const targets = el.querySelectorAll('.letter')
+
+    const enter = animate(targets, {
+      translateY: [-30, 0],
+      easing: 'easeOutExpo',
+      duration: 320,
+      delay: (el, i) => 40 * i,
+      autoplay: false,
+    })
+
+    el.addEventListener('focus', () => enter.restart().play())
+    el.addEventListener('blur', () => enter.reverse())
+  })
+</script>

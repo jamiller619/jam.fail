@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import Main from '../../layouts/Main.astro'
+import { getCollection, render } from 'astro:content'
+
+const post = Astro.props
+const { Content } = await render(post)
+---
+
+<Main>
+  <Content />
+</Main>

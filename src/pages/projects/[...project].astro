@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import MainLayout from '../../layouts/Main.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects')
+
+  return projects.map((project) => ({
+    params: { project: project.data.title.toLowerCase() },
+    props: project,
+  }))
+}
+
+type Props = CollectionEntry<'projects'>
+
+const project = Astro.props
+const { Content } = await render(project)
+const { title, description, image, links } = project.data
+---
+
+<MainLayout>
+  <div
+    class="hero"
+    style={{
+      backgroundImage: `url(${image.url.src})`,
+    }}>
+    <div class="container">
+      <h1>{title}</h1>
+      <p>{description}</p>
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+  </div>
+  <div class="container content">
+    <Content />
+  </div>
+</MainLayout>
+
+<style>
+  .hero {
+    height: 50vh;
+    min-width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: end;
+
+    .container {
+      padding-inline: var(--body-padding);
+    }
+
+    h1 {
+      font-size: 6rem;
+      padding-top: var(--size-10);
+    }
+
+    p {
+      font-size: var(--font-size-5);
+      line-height: var(--font-lineheight-0);
+    }
+
+    a {
+      display: block;
+      margin-block: var(--size-8);
+    }
+  }
+
+  .content {
+    padding-inline: var(--body-padding);
+
+    h1,
+    h2,
+    h3 {
+      color: var(--accent);
+      margin-block: var(--size-4);
+      letter-spacing: var(--font-letterspacing-0);
+    }
+  }
+</style>
