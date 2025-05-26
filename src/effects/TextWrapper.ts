@@ -45,6 +45,7 @@ function attributesToString(attributes: Options['attributes']): string {
       if (value === true) {
         return `${key}` // e.g. `disabled` becomes just `disabled`
       }
+
       return `${key}="${String(value).replace(/"/g, '&quot;')}"`
     })
     .join(' ')

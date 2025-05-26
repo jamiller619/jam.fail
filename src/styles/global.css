@@ -5,7 +5,7 @@
 @import '@radix-ui/colors/red';
 @import '@radix-ui/colors/red-dark';
 @import url('https://use.typekit.net/hzi1zjb.css');
-@import './transitions.css';
+/* @import './transitions.css'; */
 
 /**
  * Light/Dark mode
@@ -45,7 +45,7 @@ a {
 }
 
 p {
-  font-family: "Inconsolata", monospace;
+  font-family: 'Inconsolata', monospace;
 }
 
 h1 {
@@ -66,15 +66,19 @@ h3 {
     padding-inline-start: var(--size-3);
   }
 }
-/* .container { */
-  /* padding-inline: var(--size-3); */
-  /* margin-inline: auto; */
 
-  /* @media (max-width: 999px) {
+.material-symbols-outlined {
+  font-size: 32px;
+}
+/* .container { */
+/* padding-inline: var(--size-3); */
+/* margin-inline: auto; */
+
+/* @media (max-width: 999px) {
     width: 100%;
   } */
 
-  /* @media (min-width: 1000px) and (max-width: 1399px) {
+/* @media (min-width: 1000px) and (max-width: 1399px) {
     max-width: 960px;
   }
 
@@ -90,5 +94,6 @@ h3 {
 .gradient-text {
   background: var(--gradient-20);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }

@@ -48,9 +48,17 @@ import LogoSVG from '../icons/logo.svg'
 </style>
 
 <header>
-  <a href="/" id="logo">
-    <LogoSVG />
-  </a>
+  {
+    Astro.url.pathname === '/' ? (
+      <a href="/" id="logo">
+        <LogoSVG />
+      </a>
+    ) : (
+      <a href="javascript:window.history.back()">
+        <span class="material-symbols-outlined">arrow_back_ios</span>back
+      </a>
+    )
+  }
   <div class="end">
     <a href="/blog">blog</a>
     <a href="/about">about</a>
