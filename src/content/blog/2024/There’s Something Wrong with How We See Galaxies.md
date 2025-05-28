@@ -1,6 +1,15 @@
-# There’s Something Wrong with How We See Galaxies
+---
+title: 'There’s Something Wrong with How We See Galaxies'
+publishDate: '2024-11-24'
+tags:
+  - 'space'
+link: '/blog/theres-something-wrong-with-how-we-see-galaxies'
+image:
+  url: '../covers/galaxy.jpg'
+  alt: 'Far away Andromeda galaxy'
+---
 
-Created: November 26, 2024 3:43 AM
+# There’s Something Wrong with How We See Galaxies
 
 When we look at images of galaxies, we assume we’re seeing them as they are. In reality, we’re viewing a composite of stars’ positions from different points in time. Light from a galaxy millions of light-years away takes millions of years to reach us, and stars within a galaxy move over vast timescales. This means our view is a distortion—a snapshot of the past rather than the present.
 
@@ -18,4 +27,8 @@ Well, I don’t have a fucking clue, but I’m guessing they’re not whirly-sha
 
 # **The Path Forward**
 
-Reconstructing galaxies could provide clearer insights into cosmic evolution and challenge long-held theories. With AI, advanced simulations, and next-gen telescopes, we may soon see galaxies not as they appear to us, but as they truly were—and perhaps rewrite our understanding of the universe.
+Reconstructing galaxies could provide clearer insights into
+cosmic evolution and challenge long-held theories. With AI,
+advanced simulations, and next-gen telescopes, we may soon
+see galaxies not as they appear to us, but as they truly
+were—and perhaps rewrite our understanding of the universe.

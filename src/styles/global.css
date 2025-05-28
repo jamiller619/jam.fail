@@ -5,6 +5,7 @@
 @import '@radix-ui/colors/red';
 @import '@radix-ui/colors/red-dark';
 @import url('https://use.typekit.net/hzi1zjb.css');
+@import './scrollbars.css';
 /* @import './transitions.css'; */
 
 /**
@@ -49,7 +50,7 @@ p {
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 6rem;
 }
 
 h3 {
