@@ -49,8 +49,15 @@ p {
   font-family: 'Inconsolata', monospace;
 }
 
+h1,
+h2,
+h3 {
+  letter-spacing: var(--font-letterspacing-0);
+}
+
 h1 {
   font-size: 6rem;
+  font-weight: var(--font-weight-8);
 }
 
 h3 {

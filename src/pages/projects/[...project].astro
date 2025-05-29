@@ -23,7 +23,8 @@ const { title, description, image, links } = project.data
     class="hero"
     style={{
       backgroundImage: `url(${image.url.src})`,
-    }}>
+    }}
+    transition:name=`hero-image-${project.data.link}`>
     <div class="container">
       <h1>{title}</h1>
       <p>{description}</p>

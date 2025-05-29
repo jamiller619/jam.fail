@@ -1,13 +1,31 @@
 ---
 import Main from '../layouts/Main.astro'
 import Hero from '../components/Hero.astro'
-import Content from '../components/Content.astro'
+import { getCollection } from 'astro:content'
+import ProjectCard from '../components/ProjectCard.astro'
+
+const projects = await getCollection('projects')
 ---
 
 <Main>
   <Hero />
-  <Content collection="projects" />
+  <div class="grid">
+    {projects.map((project) => <ProjectCard {...project.data} />)}
+  </div>
 </Main>
+
+<style>
+  .grid {
+    display: grid;
+    gap: calc(var(--body-padding) / 2);
+    grid-template-columns: 1fr 1fr;
+    margin-inline: calc(var(--body-padding) / 4);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
 <script>
   import { animate } from 'animejs'

@@ -1,17 +1,15 @@
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-group(root) {
+/* ::view-transition-group(root) {
   animation-duration: 0.5s;
-}
+} */
 
 @keyframes out {
   from {
     transform: scale(1);
+    opacity: 1;
   }
   to {
     transform: scale(0.9);
+    opacity: 0;
   }
 }
 
@@ -25,9 +23,9 @@
 }
 
 ::view-transition-old(root) {
-  animation: 0.4s ease-in 0.4s both out;
+  animation: 0.4s ease-in both out;
 }
 
 ::view-transition-new(root) {
-  animation: 0.4s eaase-in both in;
+  animation: 0.4s ease-in both in;
 }
