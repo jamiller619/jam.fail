@@ -7,7 +7,19 @@ import Main from '../layouts/Main.astro'
     display: flex;
     flex-direction: column;
     gap: var(--size-8);
-    margin-block-start: var(--size-10);
+    padding-block: var(--size-10);
+    background: url(../styles/images/me.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      inset: 0;
+      background-color: rgb(var(--accent) / 0.8);
+    }
   }
 
   p {
@@ -33,3 +45,36 @@ import Main from '../layouts/Main.astro'
     </p>
   </div>
 </Main>
+
+<script>
+  import { animate } from 'animejs'
+  import { wrapText, type Options } from '../effects/TextWrapper'
+
+  const opts: Options = {
+    attributes: {
+      style: `display: inline-block;`,
+    },
+  }
+
+  document.querySelectorAll('.container h1').forEach((el) => wrapText(el, opts))
+
+  // document.querySelectorAll('.container h1')
+
+  // document.querySelectorAll('.container h1').forEach((el) => {
+  //   const targets = el.querySelectorAll('h2 span')
+
+  //   const enter = animate(targets, {
+  //     translateY: 0,
+  //     opacity: 1,
+  //     easing: 'easeOutExpo',
+  //     duration: 320,
+  //     delay: (_, i) => 30 * i,
+  //     autoplay: false,
+  //   })
+
+  //   el.addEventListener('pointerenter', () => enter.restart())
+  //   el.addEventListener('pointerleave', () => enter.reverse())
+  //   // el.addEventListener('focus', () => enter.restart())
+  //   // el.addEventListener('blur', () => enter.reverse())
+  // })
+</script>
