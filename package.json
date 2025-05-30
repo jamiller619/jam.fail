@@ -13,6 +13,7 @@
   "devDependencies": {
     "@radix-ui/colors": "^3.0.0",
     "@theatre/studio": "^0.7.2",
+    "@types/splitting": "^1.0.6",
     "@types/three": "^0.176.0",
     "@typescript-eslint/parser": "^8.8.1",
     "astro": "^5.7.13",
@@ -31,6 +32,7 @@
     "@astrojs/check": "^0.9.4",
     "@theatre/core": "^0.7.2",
     "animejs": "^4.0.2",
+    "splitting": "^1.1.0",
     "three": "^0.176.0"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"

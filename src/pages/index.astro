@@ -29,22 +29,26 @@ const projects = await getCollection('projects')
 
 <script>
   import { animate } from 'animejs'
-  import { wrapText, type Options } from '../effects/TextWrapper'
+  import Splitting from 'splitting'
+  import 'splitting/dist/splitting.css'
+  import 'splitting/dist/splitting-cells.css'
 
-  const opts: Options = {
-    attributes: {
-      style: `display: inline-block; transform: translateY(-30px); opacity: 0`,
-    },
-  }
-
-  document.querySelectorAll('.link h2').forEach((el) => wrapText(el, opts))
+  Splitting({
+    target: document.querySelectorAll('.link h2'),
+  })
 
   document.querySelectorAll('.link').forEach((el) => {
-    const targets = el.querySelectorAll('h2 span')
+    const targets = el.querySelectorAll('h2 .char')
 
     const enter = animate(targets, {
-      translateY: 0,
-      opacity: 1,
+      translateY: {
+        from: -30,
+        to: 0,
+      },
+      opacity: {
+        from: 0,
+        to: 1,
+      },
       easing: 'easeOutExpo',
       duration: 320,
       delay: (_, i) => 30 * i,
@@ -53,7 +57,5 @@ const projects = await getCollection('projects')
 
     el.addEventListener('pointerenter', () => enter.restart())
     el.addEventListener('pointerleave', () => enter.reverse())
-    // el.addEventListener('focus', () => enter.restart())
-    // el.addEventListener('blur', () => enter.reverse())
   })
 </script>
