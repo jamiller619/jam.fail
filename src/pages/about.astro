@@ -3,33 +3,37 @@ import Main from '../layouts/Main.astro'
 ---
 
 <style>
-  .container {
+  .hero {
     display: flex;
     flex-direction: column;
     gap: var(--size-8);
-    padding-block: var(--size-10);
-    background: url(../styles/images/me.jpg);
+    place-content: end;
+    padding-block-start: var(--size-12);
+    background: url(../content/images/me.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 
-    &::after {
+    /* &::after {
       content: '';
       display: block;
       position: absolute;
       inset: 0;
-      background-color: rgb(var(--accent) / 0.8);
-    }
+      background-color: red;
+      mix-blend-mode: color-burn;
+    } */
   }
 
   p {
-    font-size: 1.5rem;
+    margin-block-start: 5rem;
   }
 </style>
 
 <Main>
-  <div class="container">
+  <div class="hero container">
     <h1>Creative for hire.</h1>
+  </div>
+  <div class="content container">
     <p>
       Over the past twenty years, I've worked across nearly every creative
       discipline —from Motion and Interactive Design to Creative Director, Unity
@@ -47,16 +51,16 @@ import Main from '../layouts/Main.astro'
 </Main>
 
 <script>
-  import { animate } from 'animejs'
-  import { wrapText, type Options } from '../effects/TextWrapper'
+  // import { animate } from 'animejs'
+  // import { wrapText, type Options } from '../effects/TextWrapper'
 
-  const opts: Options = {
-    attributes: {
-      style: `display: inline-block;`,
-    },
-  }
+  // const opts: Options = {
+  //   attributes: {
+  //     style: `display: inline-block;`,
+  //   },
+  // }
 
-  document.querySelectorAll('.container h1').forEach((el) => wrapText(el, opts))
+  // document.querySelectorAll('.container h1').forEach((el) => wrapText(el, opts))
 
   // document.querySelectorAll('.container h1')
 

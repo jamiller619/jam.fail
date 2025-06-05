@@ -1,27 +1,26 @@
-/* @import 'open-props/style'; */
 @import 'open-props/normalize';
-@import '@radix-ui/colors/mauve';
-@import '@radix-ui/colors/mauve-dark';
+@import '@radix-ui/colors/gray';
+@import '@radix-ui/colors/gray-dark';
 @import '@radix-ui/colors/red';
 @import '@radix-ui/colors/red-dark';
 @import url('https://use.typekit.net/hzi1zjb.css');
 @import './scrollbars.css';
-/* @import './transitions.css'; */
+@import './transitions.css';
 
 /**
  * Light/Dark mode
  */
 :root {
-  --surface-1: var(--mauve-2);
-  --surface-2: var(--mauve-3);
-  --surface-3: var(--mauve-4);
-  --surface-4: var(--mauve-5);
+  --surface-1: var(--gray-2);
+  --surface-2: var(--gray-3);
+  --surface-3: var(--gray-4);
+  --surface-4: var(--gray-5);
 
-  --text-1: var(--mauve-12);
-  --text-2: var(--mauve-11);
-  --text-3: var(--mauve-10);
-  --text-4: var(--mauve-9);
-  --text-5: var(--mauve-8);
+  --text-1: var(--gray-12);
+  --text-2: var(--gray-11);
+  --text-3: var(--gray-10);
+  --text-4: var(--gray-9);
+  --text-5: var(--gray-8);
 
   --accent: var(--red-9);
 
@@ -40,13 +39,20 @@ body {
   margin: 0 var(--size-3);
 }
 
+svg {
+  fill: currentColor;
+}
+
 a {
   color: currentColor;
   text-decoration-color: currentColor;
 }
 
 p {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Newsreader', serif;
+}
+p, li {
+  font-size: 1.5rem;
 }
 
 h1,
@@ -57,9 +63,10 @@ h3 {
 
 h1 {
   font-size: 6rem;
-  font-weight: var(--font-weight-8);
 }
-
+h2 {
+  font-size: 4rem;
+}
 h3 {
   font-size: 3rem;
 }
@@ -68,7 +75,8 @@ h3 {
  * Classes
  */
 .container {
-  padding-inline-start: var(--size-11);
+  padding-inline: var(--size-11);
+  /* padding-inline-start: var(--size-11); */
 
   @media (max-width: 768px) {
     padding-inline-start: var(--size-3);
@@ -76,7 +84,9 @@ h3 {
 }
 
 .material-symbols-outlined {
-  font-size: 32px;
+  font-size: inherit;
+  vertical-align: middle;
+  /* font-size: 32px; */
 }
 /* .container { */
 /* padding-inline: var(--size-3); */

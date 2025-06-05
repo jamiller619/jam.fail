@@ -1,14 +1,14 @@
 ---
-title: 'Fresh'
-date: '2017'
-description: 'A JavaScript library for creating user interfaces on the modern web via Web Components.'
-link: '/projects/fresh'
+title: Fresh
+date: 2017
+description: A JavaScript library for creating user interfaces on the modern web via Web Components.
+link: /projects/fresh
 image:
-  url: './covers/fresh.png'
-  alt: 'Fresh logo'
+  url: ./covers/fresh.png
+  alt: Fresh logo
 links:
-  - label: 'View on Github'
-    href: 'https://github.com/jamiller619/fresh'
+  - label: View on Github
+    href: https://github.com/jamiller619/fresh
 ---
 
 # Web Components, meet JSX.

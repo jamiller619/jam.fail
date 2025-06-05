@@ -1,5 +1,6 @@
 ---
-import LogoSVG from '../icons/logo.svg'
+import LogoSVG from '../content/icons/logo.svg'
+import BackIcon from '../content/icons/back.svg'
 ---
 
 <!-- <script>
@@ -26,10 +27,9 @@ import LogoSVG from '../icons/logo.svg'
     place-content: space-between;
     color: var(--accent);
     z-index: 1;
-
-    svg {
-      fill: currentColor;
-    }
+    /** This keeps the header from jumping around because
+    the height changes dependent on content */
+    height: 96px;
   }
 
   a {
@@ -55,7 +55,8 @@ import LogoSVG from '../icons/logo.svg'
       </a>
     ) : (
       <a href="javascript:window.history.back()">
-        <span class="material-symbols-outlined">arrow_back_ios</span>back
+        <BackIcon />
+        back
       </a>
     )
   }

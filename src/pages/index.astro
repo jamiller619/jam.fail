@@ -10,7 +10,14 @@ const projects = await getCollection('projects')
 <Main>
   <Hero />
   <div class="grid">
-    {projects.map((project) => <ProjectCard {...project.data} />)}
+    {
+      projects
+        .sort(
+          (a, b) =>
+            new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+        )
+        .map((project) => <ProjectCard {...project.data} />)
+    }
   </div>
 </Main>
 
@@ -42,15 +49,15 @@ const projects = await getCollection('projects')
 
     const enter = animate(targets, {
       translateY: {
-        from: -30,
+        from: -40,
         to: 0,
       },
       opacity: {
         from: 0,
         to: 1,
       },
-      easing: 'easeOutExpo',
-      duration: 320,
+      easing: 'easeOut',
+      duration: 280,
       delay: (_, i) => 30 * i,
       autoplay: false,
     })

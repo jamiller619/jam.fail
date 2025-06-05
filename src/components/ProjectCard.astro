@@ -42,8 +42,8 @@ const { title, image, link, description, data } = Astro.props
     }
 
     p {
-      font-weight: bold;
-      color: var(--text-2);
+      /* font-weight: bold; */
+      /* color: var(--text-2); */
     }
   }
 </style>
@@ -53,8 +53,7 @@ const { title, image, link, description, data } = Astro.props
   class="link"
   style={{
     backgroundImage: `url(${image.url.src})`,
-  }}
-  transition:name=`hero-image-${link}`>
+  }}>
   <span class="content">
     <h2>{title}</h2>
     <p>{description}</p>

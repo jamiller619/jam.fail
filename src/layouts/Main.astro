@@ -14,11 +14,11 @@ import ViewTransitions from '../components/ViewTransitions.astro'
     initial-scale=1" />
     <title>The portfolio of Jeff Miller</title>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Newsreader&display=swap');
     </style>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,700,0,0&icon_names=arrow_back_ios"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,700,0,0&icon_names=arrow_back_ios,open_in_new"
     />
     <ViewTransitions />
     <script>
@@ -32,7 +32,7 @@ import ViewTransitions from '../components/ViewTransitions.astro'
     </script>
   </head>
   <body>
-    <Header />
+    <Header transition:name="header" />
     <main>
       <slot />
     </main>

@@ -21,7 +21,7 @@ const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      date: z.string(),
+      date: z.coerce.date(),
       description: z.string(),
       link: z.string(),
       image: z.object({
@@ -31,6 +31,7 @@ const projects = defineCollection({
       links: z.array(
         z.object({
           label: z.string(),
+          icon: z.string().optional(),
           href: z.string(),
         }),
       ),

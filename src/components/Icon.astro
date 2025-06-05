@@ -1,0 +1,7 @@
+---
+import Svg from '@jasikpark/astro-svg-loader'
+
+const { name } = Astro.props
+---
+
+<Svg src={import(`../content/icons/${name}.svg?raw`)} />

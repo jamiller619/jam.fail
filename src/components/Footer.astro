@@ -1,3 +1,9 @@
+---
+import GithubIcon from '../content/icons/github.svg'
+import LinkedInIcon from '../content/icons/linkedin.svg'
+import ResumeIcon from '../content/icons/docs.svg'
+---
+
 <style>
   footer {
     display: flex;
@@ -5,12 +11,14 @@
     gap: var(--size-6);
     margin-block: var(--size-10);
     padding-block: var(--size-8);
-    border-top: 5px solid var(--surface-4);
+    border-top: 5px solid var(--text-4);
   }
 
   a {
     color: var(--accent);
     text-decoration: underline;
+    display: inline-flex;
+    gap: var(--size-1);
 
     &:hover {
       text-decoration: none;
@@ -33,19 +41,27 @@
     margin-top: var(--size-5);
     text-wrap: nowrap;
   }
+
+  svg {
+    max-inline-size: 1rem;
+  }
 </style>
 
 <footer class="container">
-  <h2><a href="mailto:hello@jam.fail">hello@jam.fail</a></h2>
+  <h3><a href="mailto:hello@jam.fail">hello@jam.fail</a></h3>
   <p>
-    <span class="accent">Hey!</span> I am currently exploring opportunities. Have
-    something in mind? <a href="mailto:hello@jam.fail">Get in touch!</a>
+    <span class="accent">Hey!</span> I am currently exploring opportunities.<br
+    />Have something in mind? <a href="mailto:hello@jam.fail">Get in touch!</a>
   </p>
   <nav>
     <ul>
-      <li><a href="">Resume</a></li>
-      <li><a href="">LinkedIn</a></li>
-      <li><a href="https://github.com/jamiller619">Github</a></li>
+      <li>
+        <a href=""><ResumeIcon />Resume</a>
+      </li>
+      <li><a href=""><LinkedInIcon /> LinkedIn</a></li>
+      <li>
+        <a href="https://github.com/jamiller619"><GithubIcon /> Github</a>
+      </li>
     </ul>
   </nav>
   <small>
