@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content'
+import ProjectCard from '../components/ProjectCard.astro'
+import type { CollectionEntry } from 'astro:content'
+
+const projects = await getCollection('projects')
+
+type Project = CollectionEntry<'projects'>
+
+function sortProjects(a: Project, b: Project) {
+  return b.data.date.getTime() - a.data.date.getTime()
+}
+---
+
+<div class="grid">
+  {
+    projects
+      .sort(sortProjects)
+      .map((project) => <ProjectCard {...project.data} />)
+  }
+</div>
+
+<style>
+  .grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--size-8);
+    perspective: 1000px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import Grid from '../effects/Grid'
+
+  const grid = new Grid(document.querySelector('.grid')!)
+</script>

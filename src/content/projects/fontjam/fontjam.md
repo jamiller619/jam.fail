@@ -4,7 +4,7 @@ date: 2019
 description: A desktop app for managing fonts.
 link: /projects/fontjam
 image:
-  url: ./covers/fontjam.png
+  url: ./cover.png
   alt: Fontjam logo
 links:
   - label: Github

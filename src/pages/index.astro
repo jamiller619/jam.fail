@@ -1,68 +1,25 @@
 ---
 import Main from '../layouts/Main.astro'
 import Hero from '../components/Hero.astro'
-import { getCollection } from 'astro:content'
-import ProjectCard from '../components/ProjectCard.astro'
-
-const projects = await getCollection('projects')
+import Grid from '../components/Grid.astro'
 ---
 
 <Main>
   <Hero />
-  <div class="grid">
-    {
-      projects
-        .sort(
-          (a, b) =>
-            new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-        )
-        .map((project) => <ProjectCard {...project.data} />)
-    }
-  </div>
+  <Grid />
 </Main>
 
 <style>
-  .grid {
-    display: grid;
-    gap: calc(var(--body-padding) / 2);
-    grid-template-columns: 1fr 1fr;
-    margin-inline: calc(var(--body-padding) / 4);
+  html,
+  body,
+  main {
+    overflow: hidden;
+  }
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
+  main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    place-content: center;
   }
 </style>
-
-<script>
-  import { animate } from 'animejs'
-  import Splitting from 'splitting'
-  import 'splitting/dist/splitting.css'
-  import 'splitting/dist/splitting-cells.css'
-
-  Splitting({
-    target: document.querySelectorAll('.link h2'),
-  })
-
-  document.querySelectorAll('.link').forEach((el) => {
-    const targets = el.querySelectorAll('h2 .char')
-
-    const enter = animate(targets, {
-      translateY: {
-        from: -40,
-        to: 0,
-      },
-      opacity: {
-        from: 0,
-        to: 1,
-      },
-      easing: 'easeOut',
-      duration: 280,
-      delay: (_, i) => 30 * i,
-      autoplay: false,
-    })
-
-    el.addEventListener('pointerenter', () => enter.restart())
-    el.addEventListener('pointerleave', () => enter.reverse())
-  })
-</script>

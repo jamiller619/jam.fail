@@ -4,7 +4,7 @@ date: 2025
 description: A minimal new tab page for Google Chrome.
 link: /projects/spring
 image:
-  url: ./covers/spring.jpg
+  url: ./cover.jpg
   alt: Spring logo
 links:
   - label: Github

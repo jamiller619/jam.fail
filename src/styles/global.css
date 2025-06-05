@@ -36,7 +36,7 @@ html {
 }
 
 body {
-  margin: 0 var(--size-3);
+  margin: 0;
 }
 
 svg {
@@ -76,42 +76,12 @@ h3 {
  */
 .container {
   padding-inline: var(--size-11);
-  /* padding-inline-start: var(--size-11); */
 
   @media (max-width: 768px) {
     padding-inline-start: var(--size-3);
   }
 }
 
-.material-symbols-outlined {
-  font-size: inherit;
-  vertical-align: middle;
-  /* font-size: 32px; */
-}
-/* .container { */
-/* padding-inline: var(--size-3); */
-/* margin-inline: auto; */
-
-/* @media (max-width: 999px) {
-    width: 100%;
-  } */
-
-/* @media (min-width: 1000px) and (max-width: 1399px) {
-    max-width: 960px;
-  }
-
-  @media (min-width: 1400px) {
-    max-width: 1320px;
-  } */
-/* } */
-
 .accent {
   color: var(--accent);
-}
-
-.gradient-text {
-  background: var(--gradient-20);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }

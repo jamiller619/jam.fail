@@ -4,7 +4,8 @@ const { title, image, link, description, data } = Astro.props
 
 <style>
   .link {
-    aspect-ratio: var(--ratio-landscape);
+    position: relative;
+    aspect-ratio: var(--ratio-portrait);
     background-size: 100%;
     background-size: cover;
     background-position: center;
@@ -14,8 +15,8 @@ const { title, image, link, description, data } = Astro.props
     text-decoration: none;
     box-shadow: var(--shadow-2);
     padding: var(--size-6);
-    border-radius: var(--radius-2);
-    overflow: hidden;
+    border-radius: var(--radius-4);
+    will-change: transform;
 
     @media (min-width: 1024px) {
       filter: grayscale(1);
@@ -35,15 +36,10 @@ const { title, image, link, description, data } = Astro.props
     &:focus {
       filter: grayscale(0);
 
-      .content {
+      /* .content {
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    p {
-      /* font-weight: bold; */
-      /* color: var(--text-2); */
+      } */
     }
   }
 </style>
@@ -53,9 +49,10 @@ const { title, image, link, description, data } = Astro.props
   class="link"
   style={{
     backgroundImage: `url(${image.url.src})`,
-  }}>
-  <span class="content">
+  }}
+  data-title={title}>
+  <!-- <span class="content">
     <h2>{title}</h2>
     <p>{description}</p>
-  </span>
+  </span> -->
 </a>
