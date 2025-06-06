@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content'
 import ProjectCard from '../components/ProjectCard.astro'
+import InteractiveCard from '../components/InteractiveCard.astro'
 import type { CollectionEntry } from 'astro:content'
+import Appear from './Appear.astro'
 
 const projects = await getCollection('projects')
 
@@ -12,13 +14,15 @@ function sortProjects(a: Project, b: Project) {
 }
 ---
 
-<div class="grid">
+<Appear class="grid">
   {
-    projects
-      .sort(sortProjects)
-      .map((project) => <ProjectCard {...project.data} />)
+    projects.sort(sortProjects).map((project) => (
+      <InteractiveCard>
+        <ProjectCard {...project.data} />
+      </InteractiveCard>
+    ))
   }
-</div>
+</Appear>
 
 <style>
   .grid {
@@ -36,9 +40,3 @@ function sortProjects(a: Project, b: Project) {
     }
   }
 </style>
-
-<script>
-  import Grid from '../effects/Grid'
-
-  const grid = new Grid(document.querySelector('.grid')!)
-</script>

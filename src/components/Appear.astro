@@ -1,0 +1,51 @@
+<script>
+  import { gsap } from 'gsap'
+
+  const from: gsap.TweenVars = {
+    scale: 1.5,
+    opacity: 0,
+    filter: 'blur(30px)',
+  }
+
+  const to: gsap.TweenVars = {
+    duration: 1.2,
+    ease: 'expo',
+    filter: 'blur(0px)',
+    scale: 1,
+    stagger: {
+      amount: 0.2,
+      grid: 'auto',
+      from: 'center',
+    },
+  }
+
+  const to2: gsap.TweenVars = {
+    duration: 0.8,
+    ease: 'power1',
+    opacity: 1,
+    stagger: {
+      amount: 0.2,
+      grid: 'auto',
+      from: 'center',
+    },
+  }
+
+  class AppearTransition extends HTMLElement {
+    async connectedCallback() {
+      const children = Array.from(this.children)
+
+      gsap
+        .timeline()
+        .addLabel('start', 0)
+        .set(children, from, 0)
+        .to(children, to, 'start')
+        .to(children, to2, 'start')
+    }
+  }
+
+  window.customElements.define('appear-transition', AppearTransition)
+</script>
+
+<appear-transition {...Astro.props}>
+  <slot />
+</appear-transition>

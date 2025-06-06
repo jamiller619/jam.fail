@@ -1,0 +1,177 @@
+<script>
+  import { gsap } from 'gsap'
+  import { getRandomNumber, map, lerp } from '../effects/utils'
+  import state from './state'
+
+  /**
+   * Custom Web Component that animates its position and rotation based on
+   * the user's mouse position. Designed for hover-based 3D interactivity.
+   */
+  class InteractiveCard extends HTMLElement {
+    translation = { x: 0, y: 0 }
+    rotation = { x: 0, y: 0 }
+
+    xstart = getRandomNumber(70, 100)
+    ystart = getRandomNumber(40, 65)
+
+    rxstart = 5
+    rystart = 10
+
+    isLeft: boolean
+    isTop: boolean
+
+    ry: number
+    rx: number
+    tz: number
+
+    requestId?: number
+    hoverTimeout?: number
+
+    tlHoverIn!: gsap.core.Timeline
+    tlHoverOut!: gsap.core.Timeline
+
+    connectedCallback() {
+      this.layout()
+
+      this.addEventListener('mouseenter', this.onMouseEnter.bind(this))
+      this.addEventListener('mouseleave', this.onMouseLeave.bind(this))
+
+      this.render()
+    }
+
+    layout() {
+      const rect = this.getBoundingClientRect()
+
+      const cx = rect.left + rect.width / 2
+      const cy = rect.top + rect.height / 2
+      const win = state.win
+
+      this.isLeft = cx < win.width / 2
+      this.isTop = cy < win.height / 2
+
+      this.ry = this.isLeft
+        ? map(cx, 0, win.width / 2, this.rystart, 0)
+        : map(cx, win.width / 2, win.width, 0, -this.rystart)
+
+      this.rx = this.isTop
+        ? map(cy, 0, win.height / 2, -this.rxstart, 0)
+        : map(cy, win.height / 2, win.height, 0, this.rxstart)
+
+      this.tz = this.isLeft
+        ? map(cx, 0, win.width / 2, -600, -200)
+        : map(cx, win.width / 2, win.width, -200, -600)
+
+      gsap.set(this, {
+        rotationX: this.rx,
+        rotationY: this.ry,
+        z: this.tz,
+      })
+    }
+
+    onMouseEnter() {
+      this.hoverTimeout = window.setTimeout(() => {
+        this.tlHoverOut?.kill()
+
+        this.tlHoverIn = gsap.timeline().addLabel('start', 0).to(
+          this,
+          {
+            duration: 0.8,
+            ease: 'expo',
+            scale: 1.1,
+          },
+          'start',
+        )
+      }, 10)
+    }
+
+    onMouseLeave() {
+      if (this.hoverTimeout) window.clearTimeout(this.hoverTimeout)
+      this.tlHoverIn?.kill()
+
+      this.tlHoverOut = gsap.timeline().to(this, {
+        duration: 1,
+        ease: 'power4',
+        x: 0,
+        y: 0,
+        scale: 1,
+      })
+    }
+
+    render() {
+      if (!this.requestId) {
+        this.requestId = requestAnimationFrame(() => this.move())
+      }
+    }
+
+    stop() {
+      if (this.requestId) {
+        cancelAnimationFrame(this.requestId)
+        this.requestId = undefined
+      }
+    }
+
+    move() {
+      this.requestId = undefined
+
+      const { win, mouse } = state
+
+      this.translation.x = lerp(
+        this.translation.x,
+        map(mouse.x, 0, win.width, -this.xstart, this.xstart),
+        0.04,
+      )
+
+      this.translation.y = lerp(
+        this.translation.y,
+        map(mouse.y, 0, win.height, -this.ystart, this.ystart),
+        0.04,
+      )
+
+      this.rotation.x = this.isTop
+        ? lerp(
+            this.rotation.x,
+            map(mouse.y, 0, win.height / 2, this.rxstart, 0),
+            0.04,
+          )
+        : lerp(
+            this.rotation.x,
+            map(mouse.y, win.height / 2, win.height, 0, -this.rxstart),
+            0.04,
+          )
+
+      this.rotation.y = this.isLeft
+        ? lerp(
+            this.rotation.y,
+            map(mouse.x, 0, win.width / 2, -this.rystart, 0),
+            0.04,
+          )
+        : lerp(
+            this.rotation.y,
+            map(mouse.x, win.width / 2, win.width, 0, this.rystart),
+            0.04,
+          )
+
+      gsap.set(this, {
+        x: -this.translation.x,
+        y: -this.translation.y,
+        rotationX: -this.rx - this.rotation.x,
+        rotationY: -this.ry - this.rotation.y,
+      })
+
+      this.render()
+    }
+  }
+
+  window.customElements.define('interactive-card', InteractiveCard)
+</script>
+
+<style>
+  interactive-card {
+    position: relative;
+    will-change: transform;
+  }
+</style>
+
+<interactive-card>
+  <slot />
+</interactive-card>
