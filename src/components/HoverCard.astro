@@ -1,18 +1,32 @@
 <script>
   import { gsap } from 'gsap'
-  import { getRandomNumber, map, lerp } from '../effects/utils'
-  import state from './state'
+
+  const win = calcWinSize()
+  const state = {
+    win,
+    mouse: {
+      x: win.width / 2,
+      y: win.height / 2,
+    },
+  }
+
+  window.addEventListener('resize', () => (state.win = calcWinSize()))
+  window.addEventListener('mousemove', (e) => (state.mouse = getMousePos(e)))
+
+  const map = gsap.utils.mapRange
+  const rand = gsap.utils.random
+  const lerp = gsap.utils.interpolate
 
   /**
    * Custom Web Component that animates its position and rotation based on
    * the user's mouse position. Designed for hover-based 3D interactivity.
    */
-  class InteractiveCard extends HTMLElement {
+  class HoverCard extends HTMLElement {
     translation = { x: 0, y: 0 }
     rotation = { x: 0, y: 0 }
 
-    xstart = getRandomNumber(70, 100)
-    ystart = getRandomNumber(40, 65)
+    xstart = rand(70, 100)
+    ystart = rand(40, 65)
 
     rxstart = 5
     rystart = 10
@@ -50,16 +64,16 @@
       this.isTop = cy < win.height / 2
 
       this.ry = this.isLeft
-        ? map(cx, 0, win.width / 2, this.rystart, 0)
-        : map(cx, win.width / 2, win.width, 0, -this.rystart)
+        ? map(0, win.width / 2, this.rystart, 0, cx)
+        : map(win.width / 2, win.width, 0, -this.rystart, cx)
 
       this.rx = this.isTop
-        ? map(cy, 0, win.height / 2, -this.rxstart, 0)
-        : map(cy, win.height / 2, win.height, 0, this.rxstart)
+        ? map(0, win.height / 2, -this.rxstart, 0, cy)
+        : map(win.height / 2, win.height, 0, this.rxstart, cy)
 
       this.tz = this.isLeft
-        ? map(cx, 0, win.width / 2, -600, -200)
-        : map(cx, win.width / 2, win.width, -200, -600)
+        ? map(0, win.width / 2, -600, -200, cx)
+        : map(win.width / 2, win.width, -200, -600, cx)
 
       gsap.set(this, {
         rotationX: this.rx,
@@ -117,37 +131,37 @@
 
       this.translation.x = lerp(
         this.translation.x,
-        map(mouse.x, 0, win.width, -this.xstart, this.xstart),
+        map(0, win.width, -this.xstart, this.xstart, mouse.x),
         0.04,
       )
 
       this.translation.y = lerp(
         this.translation.y,
-        map(mouse.y, 0, win.height, -this.ystart, this.ystart),
+        map(0, win.height, -this.ystart, this.ystart, mouse.y),
         0.04,
       )
 
       this.rotation.x = this.isTop
         ? lerp(
             this.rotation.x,
-            map(mouse.y, 0, win.height / 2, this.rxstart, 0),
+            map(0, win.height / 2, this.rxstart, 0, mouse.y),
             0.04,
           )
         : lerp(
             this.rotation.x,
-            map(mouse.y, win.height / 2, win.height, 0, -this.rxstart),
+            map(win.height / 2, win.height, 0, -this.rxstart, mouse.y),
             0.04,
           )
 
       this.rotation.y = this.isLeft
         ? lerp(
             this.rotation.y,
-            map(mouse.x, 0, win.width / 2, -this.rystart, 0),
+            map(0, win.width / 2, -this.rystart, 0, mouse.x),
             0.04,
           )
         : lerp(
             this.rotation.y,
-            map(mouse.x, win.width / 2, win.width, 0, this.rystart),
+            map(win.width / 2, win.width, 0, this.rystart, mouse.x),
             0.04,
           )
 
@@ -162,16 +176,30 @@
     }
   }
 
-  window.customElements.define('interactive-card', InteractiveCard)
+  window.customElements.define('hover-card', HoverCard)
+
+  function calcWinSize() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }
+  }
+
+  function getMousePos(e: MouseEvent) {
+    return {
+      x: e.clientX,
+      y: e.clientY,
+    }
+  }
 </script>
 
 <style>
-  interactive-card {
+  hover-card {
     position: relative;
     will-change: transform;
   }
 </style>
 
-<interactive-card>
+<hover-card>
   <slot />
-</interactive-card>
+</hover-card>
