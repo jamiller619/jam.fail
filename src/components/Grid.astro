@@ -1,28 +1,35 @@
 ---
-import { getCollection } from 'astro:content'
-import ProjectCard from '../components/ProjectCard.astro'
-import InteractiveCard from '../components/InteractiveCard.astro'
-import type { CollectionEntry } from 'astro:content'
-import Appear from './Appear.astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import ProjectCard from './ProjectCard.astro'
+import HoverCard from './HoverCard.astro'
+import AppearTransition from './AppearTransition.astro'
+import { gsap } from 'gsap'
 
-const projects = await getCollection('projects')
+const data = await getCollection('projects')
 
 type Project = CollectionEntry<'projects'>
 
 function sortProjects(a: Project, b: Project) {
   return b.data.date.getTime() - a.data.date.getTime()
 }
+
+const empty = new Array(data.length).fill(null)
+const projects = gsap.utils.shuffle(data.concat(empty))
 ---
 
-<Appear class="grid">
+<AppearTransition class="grid">
   {
-    projects.sort(sortProjects).map((project) => (
-      <InteractiveCard>
-        <ProjectCard {...project.data} />
-      </InteractiveCard>
-    ))
+    projects.map((project) => {
+      return project == null ? (
+        <div />
+      ) : (
+        <HoverCard>
+          <ProjectCard {...project.data} />
+        </HoverCard>
+      )
+    })
   }
-</Appear>
+</AppearTransition>
 
 <style>
   .grid {
@@ -31,8 +38,10 @@ function sortProjects(a: Project, b: Project) {
     height: 100%;
     inset: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--size-8);
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    grid-template-rows: repeat(auto-fit, 20%);
+    /* grid-template-rows: minmax(1px, auto); */
+    gap: var(--size-10);
     perspective: 1000px;
 
     @media (max-width: 768px) {

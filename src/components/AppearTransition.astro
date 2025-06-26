@@ -36,10 +36,9 @@
 
       gsap
         .timeline()
-        .addLabel('start', 0)
-        .set(children, from, 0)
-        .to(children, to, 'start')
-        .to(children, to2, 'start')
+        .set(children, from)
+        .to(children, to, 0)
+        .to(children, to2, 0)
     }
   }
 

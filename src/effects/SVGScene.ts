@@ -1,4 +1,4 @@
-import { OrbitControls, SVGLoader } from 'three/examples/jsm/Addons.js'
+import { SVGLoader } from 'three/examples/jsm/Addons.js'
 import * as THREE from 'three'
 import { Red } from 'open-props/src/props.colors.js'
 

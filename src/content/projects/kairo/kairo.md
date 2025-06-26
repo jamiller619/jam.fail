@@ -1,15 +1,15 @@
 ---
-title: Spring
+title: Kairo
 date: 2025
 description: A minimal new tab page for Google Chrome.
-link: /projects/spring
+link: /projects/kairo
 image:
   url: ./cover.jpg
-  alt: Spring logo
+  alt: Kairo logo
 links:
   - label: Github
     icon: github
-    href: https://github.com/jamiller619/spring
+    href: https://github.com/jamiller619/kairo
   - label: Chrome Webstore
     icon: chromewebstore
     href: https://chrome.google.com/webstore/detail/spring/lcomlokgcbklomfecjjpjlncapnhepbl

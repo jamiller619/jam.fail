@@ -5,15 +5,16 @@ const { title, image, link, description, data } = Astro.props
 <style>
   .link {
     display: block;
+    height: 100%;
+    width: 100%;
     aspect-ratio: var(--ratio-portrait);
     background-size: cover;
     background-position: center;
-    box-shadow: var(--shadow-2);
     border-radius: var(--radius-4);
+    transition: filter 300ms;
 
     @media (min-width: 1024px) {
       filter: grayscale(1);
-      transition: filter 300ms;
       /*
       .content {
         display: block;
@@ -28,6 +29,8 @@ const { title, image, link, description, data } = Astro.props
     &:hover,
     &:focus {
       filter: grayscale(0);
+      /* box-shadow: var(--shadow-4); */
+      /* transform: scale(1.1) rotate(0); */
 
       /* .content {
         opacity: 1;

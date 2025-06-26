@@ -1,0 +1,70 @@
+<script>
+  import { gsap } from 'gsap'
+
+  const mouse = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  }
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX
+    mouse.y = e.clientY
+  })
+
+  class BackgroundElement extends HTMLElement {
+    rect = this.firstElementChild!.getBoundingClientRect()
+    x = 0
+    y = 0
+
+    connectedCallback() {
+      this.start()
+    }
+
+    start() {
+      window.requestAnimationFrame(() => this.move())
+    }
+
+    move() {
+      this.x =
+        -mouse.x + (window.innerWidth / 2 + this.rect.width) + this.rect.width
+
+      this.y =
+        -mouse.y +
+        (window.innerHeight / 2 + this.rect.height) +
+        this.rect.height
+
+      gsap.set(this.firstElementChild, {
+        x: this.x,
+        y: this.y,
+      })
+
+      this.start()
+    }
+  }
+
+  window.customElements.define('background-element', BackgroundElement)
+</script>
+
+<style>
+  background-element {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 20%;
+      height: 20%;
+      background: var(--text-4);
+      filter: blur(80px);
+      border-radius: 50%;
+    }
+  }
+</style>
+
+<background-element>
+
+</background-element>

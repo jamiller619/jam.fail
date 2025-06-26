@@ -6,7 +6,6 @@ import '../styles/global.css'
 // import ViewTransitions from '../components/ViewTransitions.astro'
 ---
 
-<!-- <script src="../effects/Theatre"></script> -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -17,15 +16,6 @@ import '../styles/global.css'
       @import url('https://fonts.googleapis.com/css2?family=Newsreader&display=swap');
     </style>
     <!-- <ViewTransitions /> -->
-    <script>
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
-
-      if (prefersDark) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.add('light')
-      }
-    </script>
   </head>
   <body class="loading">
     <!-- <Header transition:name="header" /> -->
@@ -37,11 +27,11 @@ import '../styles/global.css'
 </html>
 
 <script>
-  import { preloadImages } from '../effects/utils'
+  import imagesLoaded from 'imagesloaded'
 
-  await preloadImages(document.querySelectorAll('.link'))
-
-  document.body.classList.remove('loading')
+  imagesLoaded(document.querySelectorAll('.link'), { background: true }, () =>
+    document.body.classList.remove('loading'),
+  )
 </script>
 
 <style>

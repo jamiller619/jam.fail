@@ -1,0 +1,128 @@
+<jam-logo></jam-logo>
+
+<script>
+  import * as THREE from 'three'
+  import { gsap } from 'gsap'
+  import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js'
+  import { Red } from 'open-props/src/props.colors.js'
+
+  const fillMaterial = new THREE.MeshPhysicalMaterial({
+    color: Red['--red-9'],
+  })
+
+  class LetterTest extends Array<THREE.Mesh> {
+    get j(): THREE.Mesh {
+      return this.find((obj) => obj.name === 'J') as THREE.Mesh
+    }
+
+    get a(): THREE.Mesh {
+      return this.find((obj) => obj.name === 'A') as THREE.Mesh
+    }
+
+    get m(): THREE.Mesh {
+      return this.find((obj) => obj.name === 'M') as THREE.Mesh
+    }
+  }
+
+  class JAMLogo extends HTMLElement {
+    letters = new LetterTest()
+    scene = new THREE.Scene()
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    camera = new THREE.PerspectiveCamera(50, 2, 0.1, 1000)
+    lights = {
+      point1: new THREE.PointLight(Red['--red-9'], 500),
+      point2: new THREE.PointLight(0xffffff, 300),
+    }
+
+    async connectedCallback() {
+      const width = window.innerWidth
+      const height = window.innerHeight
+
+      this.camera.aspect = width / height
+      this.camera.position.z = 50
+      this.camera.updateProjectionMatrix()
+
+      this.renderer.setSize(width, height)
+
+      this.lights.point1.position.set(0, 10, 10)
+      this.lights.point2.position.set(2, -5, 18)
+      this.scene.add(...Object.values(this.lights))
+
+      this.append(this.renderer.domElement)
+
+      await this.loadModel()
+
+      this.loop()
+    }
+
+    loop() {
+      this.renderer.render(this.scene, this.camera)
+
+      requestAnimationFrame(this.loop.bind(this))
+    }
+
+    async loadModel() {
+      const model = await loadGLTF('/logo.gltf')
+
+      model.scene.traverse((obj) => {
+        const node = obj as THREE.Mesh
+
+        if (node.isMesh) {
+          node.material = fillMaterial
+        }
+      })
+
+      this.letters.push(...(model.scene.children as THREE.Mesh[]))
+      const pos = this.letters.map((l) => l.position)
+
+      gsap
+        .timeline()
+        .addLabel('start', 0)
+        .from(
+          pos,
+          {
+            y: 500,
+            z: -1000,
+          },
+          0,
+        )
+        .to(
+          pos,
+          {
+            duration: 0.7,
+            z: 30,
+            y: 0,
+            ease: 'power1',
+            stagger: {
+              amount: 0.2,
+              from: 'random',
+            },
+          },
+          'start',
+        )
+
+      this.scene.add(model.scene)
+    }
+  }
+
+  window.customElements.define('jam-logo', JAMLogo)
+
+  function loadGLTF(src: string): Promise<GLTF> {
+    return new Promise((resolve) => {
+      const loader = new GLTFLoader()
+
+      loader.load(src, resolve)
+    })
+  }
+</script>
+
+<style>
+  jam-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
