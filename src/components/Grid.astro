@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content'
+import ProjectLink from '../components/ProjectLink.astro'
+import type {CollectionEntry} from 'astro:content'
+
+const projects = await getCollection('projects')
+type Project = CollectionEntry<'projects'>
+
+function sortProjects(a: Project, b: Project) {
+  return b.data.date.getTime() - a.data.date.getTime()
+}
+---
+<style>
+  .grid {
+    display: grid;
+    gap: var(--body-padding);
+    grid-template-columns: 1fr 1fr;
+    margin-inline: var(--body-padding);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="grid">
+  {
+    projects
+      .sort(sortProjects)
+      .map((project) => <ProjectLink {...project.data} />)
+  }
+</div>

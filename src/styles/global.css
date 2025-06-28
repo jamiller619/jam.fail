@@ -1,17 +1,39 @@
-@import 'open-props/normalize';
-@import '@radix-ui/colors/gray';
-@import '@radix-ui/colors/gray-dark';
-@import '@radix-ui/colors/red';
-@import '@radix-ui/colors/red-dark';
+/* @import 'open-props/normalize'; */
+/* @import '@radix-ui/colors/gray';
+@import '@radix-ui/colors/gray-dark'; */
+/* @import '@radix-ui/colors/red'; */
+/* @import '@radix-ui/colors/red-dark'; */
 @import url('https://use.typekit.net/hzi1zjb.css');
 @import './scrollbars.css';
 @import './transitions.css';
 
-/**
- * Light/Dark mode
- */
 :root {
-  --surface-1: var(--gray-2);
+  --red-9: #e5484d;
+
+  --size-1: 0.25rem;
+
+  --size-3: 1rem;
+
+  --size-5: 1.5rem;
+  --size-6: 1.75rem;
+  --size-7: 2rem;
+  --size-8: 3rem;
+  --size-9: 4rem;
+  --size-10: 5rem;
+  --size-11: 7.5rem;
+
+  --radius-2: 5px;
+
+  --font-weight-1: 100;
+  --font-weight-2: 200;
+  --font-weight-3: 300;
+  --font-weight-4: 400;
+  --font-weight-5: 500;
+  --font-weight-6: 600;
+  --font-weight-7: 700;
+  --font-weight-8: 800;
+
+  /* --surface-1: var(--gray-2);
   --surface-2: var(--gray-3);
   --surface-3: var(--gray-4);
   --surface-4: var(--gray-5);
@@ -20,15 +42,15 @@
   --text-2: var(--gray-11);
   --text-3: var(--gray-10);
   --text-4: var(--gray-9);
-  --text-5: var(--gray-8);
+  --text-5: var(--gray-8); */
 
   --accent: var(--red-9);
 
-  --body-padding: var(--size-8);
+  --body-padding: var(--size-7);
 }
 
-/**
- * Elements
+/*
+  Elements
  */
 html {
   font-family: stolzl, sans-serif;
@@ -36,7 +58,7 @@ html {
 }
 
 body {
-  margin: 0 var(--size-3);
+  margin: 0;
 }
 
 svg {
@@ -71,12 +93,11 @@ h3 {
   font-size: 3rem;
 }
 
-/**
- * Classes
+/*
+  Classes
  */
 .container {
   padding-inline: var(--size-11);
-  /* padding-inline-start: var(--size-11); */
 
   @media (max-width: 768px) {
     padding-inline-start: var(--size-3);
@@ -86,24 +107,7 @@ h3 {
 .material-symbols-outlined {
   font-size: inherit;
   vertical-align: middle;
-  /* font-size: 32px; */
 }
-/* .container { */
-/* padding-inline: var(--size-3); */
-/* margin-inline: auto; */
-
-/* @media (max-width: 999px) {
-    width: 100%;
-  } */
-
-/* @media (min-width: 1000px) and (max-width: 1399px) {
-    max-width: 960px;
-  }
-
-  @media (min-width: 1400px) {
-    max-width: 1320px;
-  } */
-/* } */
 
 .accent {
   color: var(--accent);
