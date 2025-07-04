@@ -1,20 +1,50 @@
 ---
 const { title, image, link, description } = Astro.props
 ---
+
 <script>
   import Splitting from 'splitting'
   import 'splitting/dist/splitting.css'
   import 'splitting/dist/splitting-cells.css'
-  import { animate } from 'animejs'
+  import { animate, JSAnimation } from 'animejs'
+  import { preloadImage } from '../scripts/preload-images'
 
   class ProjectLink extends HTMLAnchorElement {
-    connectedCallback() {
+    #enter: JSAnimation
+
+    #over() {
+      this.#enter.restart()
+    }
+
+    #out() {
+      this.#enter.reverse()
+    }
+
+    #resize() {
+      if (window.innerWidth < 1024) {
+        this.#enter.revert()
+      }
+    }
+
+    #overHandler = this.#over.bind(this)
+    #outHandler = this.#out.bind(this)
+    #resizeHandler = this.#resize.bind(this)
+
+    async connectedCallback() {
+      this.classList.add('loading')
+      this.parentElement?.style.setProperty('perspective', '1000px')
+
+      window.addEventListener('resize', this.#resizeHandler)
+
+      const imageURL = this.getAttribute('background-image')
+
       Splitting({
         target: this.querySelector('h2')!,
       })
 
       const targets = this.querySelectorAll('.char')
-      const enter = animate(targets, {
+
+      this.#enter = animate(targets, {
         translateY: {
           from: -40,
           to: 0,
@@ -24,13 +54,31 @@ const { title, image, link, description } = Astro.props
           to: 1,
         },
         easing: 'easeOut',
-        duration: 280,
+        duration: 180,
         delay: (_, i) => 30 * i,
         autoplay: false,
       })
 
-      this.addEventListener('pointerenter', () => enter.restart())
-      this.addEventListener('pointerleave', () => enter.reverse())
+      this.addEventListener('pointerenter', this.#overHandler)
+      this.addEventListener('pointerleave', this.#outHandler)
+
+      this.#out()
+
+      await preloadImage(imageURL)
+
+      this.classList.remove('loading')
+      this.style.setProperty('background-image', `url(${imageURL})`)
+
+      this.dispatchEvent(new CustomEvent('project-link.loaded'))
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('resize', this.#resizeHandler)
+
+      this.removeEventListener('pointerenter', this.#overHandler)
+      this.removeEventListener('pointerleave', this.#outHandler)
+
+      this.#enter.pause()
     }
   }
 
@@ -40,7 +88,9 @@ const { title, image, link, description } = Astro.props
 </script>
 
 <style>
-  a[is="project-link"] {
+  a[is='project-link'] {
+    color-scheme: dark;
+    color: canvastext;
     aspect-ratio: var(--ratio-landscape);
     background-size: 100%;
     background-size: cover;
@@ -51,13 +101,20 @@ const { title, image, link, description } = Astro.props
     text-decoration: none;
     box-shadow: var(--shadow-2);
     padding: var(--size-6);
-    border-radius: var(--radius-2);
-    overflow: hidden;
+    border-radius: var(--radius-3);
     cursor: pointer;
+    transition: filter 150ms;
+    will-change: filter;
+
+    &.loading {
+      background-color: canvastext;
+      color: transparent;
+      pointer-events: none;
+      animation: pulse 1s infinite alternate;
+    }
 
     @media (min-width: 1024px) {
       filter: grayscale(1);
-      transition: filter 150ms;
 
       .content {
         display: block;
@@ -81,6 +138,7 @@ const { title, image, link, description } = Astro.props
 
     h2 {
       margin: 0;
+      overflow: hidden;
     }
 
     .content {
@@ -88,13 +146,22 @@ const { title, image, link, description } = Astro.props
       flex-direction: column;
     }
   }
+
+  p {
+    margin-block: var(--size-2);
+  }
+
+  @keyframes pulse {
+    from {
+      opacity: 0.01;
+    }
+    to {
+      opacity: 0.1;
+    }
+  }
 </style>
 
-<a is="project-link"
-  href={link}
-  style={{
-    backgroundImage: `url(${image.url.src})`,
-  }}>
+<a is="project-link" href={link} background-image={image.url.src}>
   <span class="content">
     <h2>{title}</h2>
     <p>{description}</p>

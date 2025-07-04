@@ -1879,6 +1879,11 @@ astro-eslint-parser@^1.0.2:
     is-glob "^4.0.3"
     semver "^7.3.8"
 
+astro-integration-lottie@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/astro-integration-lottie/-/astro-integration-lottie-0.3.2.tgz#b35de473f831f8cb92ca1e7d4ec9540d3895e462"
+  integrity sha512-YPE5XjWNbu+kKTlNm4+buvL6oZDwaECiS4Mo4m3kZnykZjHOJPNoStsIN2wLgJmryRUqPZxeKiIA+tIrT6HD1Q==
+
 astro@^5.7.13:
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/astro/-/astro-5.8.0.tgz#d6a493ef712eecd05b34517d7f13d7b09f00b5e2"
@@ -5859,6 +5864,11 @@ longest-streak@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/longest-streak/-/longest-streak-3.1.0.tgz#62fa67cd958742a1574af9f39866364102d90cd4"
   integrity sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==
+
+lottie-web@^5.13.0:
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.13.0.tgz#441d3df217cc8ba302338c3f168e1a3af0f221d3"
+  integrity sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==
 
 lowercase-keys@1.0.0:
   version "1.0.0"

@@ -1,10 +1,10 @@
 ---
-title: Spring
-date: 2025
+title: InstantPlex
+date: 2005
 description: A minimal new tab page for Google Chrome.
 link: /projects/spring
 image:
-  url: ./covers/spring.jpg
+  url: ./cover.jpg
   alt: Spring logo
 links:
   - label: Github
@@ -35,8 +35,6 @@ open a new tab, you're greeted with:
 I wanted the implementation to be just as minimal as the
 interface, so I kept the stack lean, modern and native
 wherever possible.
-
-![Spring](./images/spring2.jpg)
 
 ## The Tech Stack
 
@@ -71,8 +69,6 @@ the extension includes an Options page to allow overall customization.
 If it wasn't for Deno, and their generous free hosting for
 small apps, this project wouldn't be possible. Or, at least,
 wouldn't be possible using Unsplash.
-
-![Spring](./images/spring1.jpg)
 
 ## Monorepo Structure
 

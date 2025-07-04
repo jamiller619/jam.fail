@@ -3,34 +3,23 @@ import LogoSVG from '../content/icons/logo.svg'
 import BackIcon from '../content/icons/back.svg'
 ---
 
-<!-- <script>
-  import { setup, render } from '../effects/SVGScene'
-
-  const defaultExtrusion = 6
-  const logo = document.querySelector('#logo')
-  const svg = logo?.querySelector('svg')
-  const scene = setup(logo, {
-    rendererSize: 80,
-  })
-  const { object, update } = render(defaultExtrusion, svg?.outerHTML)
-
-  if (object) scene?.add(object)
-</script> -->
 <style>
   header {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    /* padding: var(--size-2); */
     padding-inline: var(--body-padding);
     display: flex;
     place-content: space-between;
     color: var(--accent);
     z-index: 1;
+    background-color: rgb(from var(--color-bg) r g b / 0.3);
+    backdrop-filter: blur(30px);
     /** This keeps the header from jumping around because
     the height changes dependent on content */
     height: 96px;
+    view-transition-name: header;
   }
 
   a {
@@ -40,6 +29,7 @@ import BackIcon from '../content/icons/back.svg'
     font-size: var(--font-size-4);
     line-height: var(--font-lineheight-0);
     text-decoration: none;
+    color: currentColor;
   }
 
   .end {

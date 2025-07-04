@@ -4,7 +4,7 @@ date: 2017
 description: A JavaScript library for creating user interfaces on the modern web via Web Components.
 link: /projects/fresh
 image:
-  url: ./covers/fresh.png
+  url: ./cover.png
   alt: Fresh logo
 links:
   - label: View on Github

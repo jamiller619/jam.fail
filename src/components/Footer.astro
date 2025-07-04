@@ -9,9 +9,16 @@ import ResumeIcon from '../content/icons/docs.svg'
     display: flex;
     flex-direction: column;
     gap: var(--size-6);
-    margin-block: var(--size-10);
+    margin-block-start: var(--size-10);
+    margin-block-end: var(--size-8);
     padding-block: var(--size-8);
-    border-top: 5px solid var(--text-4);
+    border-top: 5px solid rgb(from canvastext r g b / 0.1);
+    margin-inline: var(--body-padding);
+    padding-inline: calc(var(--size-11) - var(--body-padding));
+  }
+
+  h3 {
+    margin-block: var(--size-2);
   }
 
   a {
@@ -30,7 +37,8 @@ import ResumeIcon from '../content/icons/docs.svg'
     margin: 0;
     padding: 0;
     display: flex;
-    gap: var(--size-3);
+    gap: var(--size-5);
+    flex-wrap: wrap;
   }
 
   li {
@@ -43,7 +51,8 @@ import ResumeIcon from '../content/icons/docs.svg'
   }
 
   svg {
-    max-inline-size: 1rem;
+    width: var(--size-6);
+    align-self: center;
   }
 </style>
 

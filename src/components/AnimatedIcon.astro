@@ -1,0 +1,41 @@
+---
+import LottieAnimation from 'astro-integration-lottie/Lottie.astro'
+---
+
+<script>
+  import type { AstroLottie } from 'astro-integration-lottie'
+
+  declare global {
+    interface Window {
+      astroLottie: AstroLottie
+    }
+  }
+
+  class AnimatedIcon extends HTMLElement {
+    #lottieAnimation = window.astroLottie.getAnimation(this.id)
+
+    #toggleAnimation() {
+      if (this.#lottieAnimation && this.#lottieAnimation.isLoaded) {
+        this.#lottieAnimation.player.togglePause()
+      }
+    }
+
+    #boundToggle = this.#toggleAnimation.bind(this)
+
+    connectedCallback() {
+      this.addEventListener('pointerenter', this.#boundToggle)
+      this.addEventListener('pointerleave', this.#boundToggle)
+    }
+  }
+
+  window.customElements.define('animated-icon', AnimatedIcon)
+</script>
+
+<animated-icon id={Astro.props.id}>
+  <LottieAnimation
+    src=`/public/animations/${Astro.props.id}.json`
+    id=`${Astro.props.id}`
+    autoplay={false}
+    loop
+  />
+</animated-icon>

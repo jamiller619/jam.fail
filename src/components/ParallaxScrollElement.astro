@@ -1,0 +1,45 @@
+---
+
+---
+
+<script>
+  class ParallaxScrollElement extends HTMLElement {
+    #scrollHandler = this.#handleScroll.bind(this)
+
+    connectedCallback() {
+      window.addEventListener('scroll', this.#scrollHandler)
+
+      this.#handleScroll()
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.#scrollHandler)
+    }
+
+    #handleScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const z = this.getAttribute('data-layer') || '0'
+
+      this.style.transform = `translateY(${scrollTop * parseFloat(z)}px)`
+    }
+  }
+
+  window.customElements.define('parallax-scroll', ParallaxScrollElement)
+</script>
+
+<parallax-scroll data-layer={Astro.props.layer}>
+  <slot />
+</parallax-scroll>
+
+<style>
+  parallax-scroll {
+    display: block;
+    position: relative;
+    will-change: transform;
+    transition: transform 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  parallax-scroll > * {
+    position: absolute;
+  }
+</style>

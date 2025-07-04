@@ -25,51 +25,53 @@ const { title, description, image, links } = project.data
     style={{
       backgroundImage: `url(${image.url.src})`,
     }}>
-    <h1>{title}</h1>
-    <p>{description}</p>
-    <div class="links">
-      {
-        links.map((link) => (
-          <a href={link.href}>
-            {link.icon && <Icon name={link.icon} />}
-            {link.label}
-          </a>
-        ))
-      }
+    <div class="content">
+      <h1>{title}</h1>
+      <p>{description}</p>
+      <div class="links">
+        {
+          links.map((link) => (
+            <a href={link.href}>
+              {link.icon && <Icon name={link.icon} />}
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
-  <div class="content container">
+  <div class="page content container">
     <Content />
   </div>
 </Main>
 
 <style>
   .hero {
-    height: 50vh;
-    padding-block-end: var(--size-5);
-    min-height: 500px;
     background-size: cover;
-    background-position: 50% -15vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    gap: var(--size-4);
-    background-attachment: fixed;
+    background-position: 50% 50%;
+    padding-block-start: var(--size-11);
+    padding-block-end: var(--size-8);
+    color: var(--text-2);
 
     a {
       display: flex;
       gap: var(--size-2);
-      font-size: 1.5rem;
+      /* font-size: 1.5rem; */
       font-weight: 500;
-      color: var(--text-2);
+      color: var(--text-1);
+      text-wrap: nowrap;
 
       svg {
-        max-inline-size: 1.5rem;
+        width: 24px;
       }
 
       &:hover {
         color: var(--text-1);
       }
+    }
+
+    h1 {
+      margin-block: var(--size-2);
     }
   }
 
@@ -79,16 +81,22 @@ const { title, description, image, links } = project.data
   }
 
   .content {
+    max-width: 50ch;
+    margin-inline: auto;
+  }
+
+  .page {
     display: flex;
     flex-direction: column;
     gap: var(--size-5);
     margin-block-start: var(--size-8);
+    line-height: var(--font-lineheight-4);
 
     h1,
     h2,
     h3 {
       color: var(--accent);
-      margin-block: var(--size-4);
+      margin-block: var(--size-1);
       line-height: var(--font-lineheight-0);
     }
 
@@ -101,18 +109,23 @@ const { title, description, image, links } = project.data
       }
     }
 
-    p,
-    li {
-      max-inline-size: 100%;
+    img {
+      block-size: 100%;
+      max-width: 100%;
     }
 
-    img {
-      margin-block: var(--size-5);
+    code {
+      background: rgb(from canvastext r g b / 0.1);
+      padding-inline: var(--size-1);
+      border-radius: var(--size-2);
     }
 
     pre {
       padding: var(--size-5);
-      max-inline-size: revert;
+
+      code {
+        background: none;
+      }
     }
   }
 </style>
